@@ -1,0 +1,40 @@
+---
+title: "2017 Summary"
+output: html_document
+---
+
+```{r setup,echo=FALSE, message=TRUE}
+library(dplyr)
+library(ggplot2)
+library(data.table)
+library(knitr)
+datasummary2017 <-read.csv("data2017_jan_oct.csv",stringsAsFactors = FALSE)
+
+Group.Evaluation <-function (x) {
+  col_name <- as.name(colnames(datasummary2017 %>% select(x)))
+  group.eval <-datasummary2017 %>% 
+    group_by_(col_name) %>% 
+    summarise(n=n())
+  group.eval <-group.eval[complete.cases(group.eval), ]
+  total.number <-sum(group.eval$n)
+
+pect.excellent <-paste(round(as.numeric(group.eval[group.eval[,1]=="Excellent",2])/total.number,4)*100, "%", sep="")
+pect.good <-paste(round(as.numeric(group.eval[group.eval[,1]=="Good",2])/total.number,4)*100, "%", sep="")
+pect.verygood <-paste(round(as.numeric(group.eval[group.eval[,1]=="Very Good",2])/total.number,4)*100, "%", sep="")
+pect.fair <-paste(round(as.numeric(group.eval[group.eval[,1]=="Fair",2])/total.number,4)*100, "%", sep="")
+pect.poor <-paste(round(as.numeric(group.eval[group.eval[,1]=="Poor",2])/total.number,4)*100, "%", sep="")
+  
+eval.data <- data.frame(
+                      Excellent=pect.excellent,
+                      VeryGood=pect.verygood,
+                      Good=pect.good,
+                      Fair=pect.fair,
+                      Poor=pect.poor,
+                      TourEvaluation=colnames(datasummary2017%>% select(x)))}
+
+
+eval.sum <-lapply(colnames(datasummary2017[,3:10]),Group.Evaluation)
+eval.sum <-as.data.frame(do.call(rbind, eval.sum ))
+knitr::kable(eval.sum,format = "markdown")
+
+```
