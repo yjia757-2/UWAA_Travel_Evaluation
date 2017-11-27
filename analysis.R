@@ -33,7 +33,7 @@ eval.sum <-as.data.frame(do.call(rbind, eval.sum ))
 
 
 
-#I wrote function to get how many "good" in a given data set, which will be group_by tour_operator or tour_name. Each operator would have ten rows. since there are 10 column in the original dataframe. The computer will go over each row to count how many "good" in that. 
+ #Data grouped by tour operator and tour's name.  
 
 
 CalGood <-function (x){
@@ -63,8 +63,20 @@ datasum.name <- datasummary2017 %>%
                   very_good=CalVeryGood(.),
                   good=CalGood(.),
                   fair=CalFair(.),
-                  poor=CalPoor(.)
-                  ))
+                  poor=CalPoor(.))) 
+datasum.name[,"total"] <-rowSums(datasum.name[,c(2:6)])
+name.eval<- datasum.name %>% group_by(tour_name) %>% summarise("Total"=sum(total),
+                                                       "Excellent"=sum(excellent)/Total,
+                                                       "VeryGood"=sum(very_good)/Total,
+                                                       "Good"=sum(good)/Total,
+                                                       "Fair"=sum(fair)/Total,
+                                                       "Poor"=sum(poor)/Total)
+name.eval$Excellent <-paste(round(name.eval$Excellent*100,2),"%",sep="")
+name.eval$VeryGood <-paste(round(name.eval$VeryGood*100,2),"%",sep="")
+name.eval$Good <-paste(round(name.eval$Good*100,2),"%",sep="")
+name.eval$Fair <-paste(round(name.eval$Fair*100,2),"%",sep="")
+name.eval$Poor <-paste(round(name.eval$Poor*100,2),"%",sep="")
+
 
 datasum.operator <- datasummary2017 %>% 
   group_by(tour_operator) %>% 
@@ -72,18 +84,20 @@ datasum.operator <- datasummary2017 %>%
                 very_good=CalVeryGood(.),
                 good=CalGood(.),
                 fair=CalFair(.),
-                poor=CalPoor(.))) 
-datasum.operator %>% group_by(tour_operator) %>% colSums(.)
-
-
-# number of each evaluation we get through the year 
-GoodEvaluation <-function (x){
-  as.data.frame(lapply(datasummary2017[,3:10],function (i)sum(i=="Good",na.rm=TRUE)))}
-cal <-function (x){
-  data <-x
-  sum(data$overall_assessment=="Good")
-}
-
+                poor=CalPoor(.))) %>% 
+  select("tour_operator","excellent","very_good","good","fair","poor")
+datasum.operator[,"total"] <-rowSums(datasum.operator[,c(2:6)])
+operator.eval<- datasum.operator %>% group_by(tour_operator) %>% summarise("Total"=sum(total),
+                                                               "Excellent"=sum(excellent)/Total,
+                                                               "VeryGood"=sum(very_good)/Total,
+                                                               "Good"=sum(good)/Total,
+                                                               "Fair"=sum(fair)/Total,
+                                                               "Poor"=sum(poor)/Total)
+operator.eval$Excellent <-paste(round(operator.eval$Excellent*100,2),"%",sep="")
+operator.eval$VeryGood <-paste(round(operator.eval$VeryGood*100,2),"%",sep="")
+operator.eval$Good <-paste(round(operator.eval$Good*100,2),"%",sep="")
+operator.eval$Fair <-paste(round(operator.eval$Fair*100,2),"%",sep="")
+operator.eval$Poor <-paste(round(operator.eval$Poor*100,2),"%",sep="")
 
 
 
