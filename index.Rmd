@@ -1,40 +1,117 @@
 ---
-title: "2017 Summary"
+title: "2017 Tour Evaluation"
 output: html_document
+author: UWAA Tours 
+params:
+  data_2017: "data/data2017_jan_oct.csv"
 ---
+<br/>
 
-```{r setup,echo=FALSE, message=TRUE}
+```{r setup,echo=FALSE, message=FALSE}
+library(jsonlite)
+library(httr)
+library(knitr)
+library(rmarkdown)
 library(dplyr)
 library(ggplot2)
 library(data.table)
-library(knitr)
-datasummary2017 <-read.csv("data2017_jan_oct.csv",stringsAsFactors = FALSE)
+library(stringr)
+library(formattable)
+source("analysis.R")
+datasum2017 <- InputData(params$data_2017)
+```
 
-Group.Evaluation <-function (x) {
-  col_name <- as.name(colnames(datasummary2017 %>% select(x)))
-  group.eval <-datasummary2017 %>% 
-    group_by_(col_name) %>% 
-    summarise(n=n())
-  group.eval <-group.eval[complete.cases(group.eval), ]
-  total.number <-sum(group.eval$n)
+The data is collected from the Jan-Oct 2017 trip evaluations on WUFOO website. The purpose of this resport is demostrating the satisfaction from the travelers who joined UWAA Tours Departemnt's trips, and helping team members better understand the travelers' feedback. Since the data has only been collected from the trips in Jan-Oct 2017, this report does not represent the entire year 2017. 
+<br/>
+<br/>
 
-pect.excellent <-paste(round(as.numeric(group.eval[group.eval[,1]=="Excellent",2])/total.number,4)*100, "%", sep="")
-pect.good <-paste(round(as.numeric(group.eval[group.eval[,1]=="Good",2])/total.number,4)*100, "%", sep="")
-pect.verygood <-paste(round(as.numeric(group.eval[group.eval[,1]=="Very Good",2])/total.number,4)*100, "%", sep="")
-pect.fair <-paste(round(as.numeric(group.eval[group.eval[,1]=="Fair",2])/total.number,4)*100, "%", sep="")
-pect.poor <-paste(round(as.numeric(group.eval[group.eval[,1]=="Poor",2])/total.number,4)*100, "%", sep="")
-  
-eval.data <- data.frame(
-                      Excellent=pect.excellent,
-                      VeryGood=pect.verygood,
-                      Good=pect.good,
-                      Fair=pect.fair,
-                      Poor=pect.poor,
-                      TourEvaluation=colnames(datasummary2017%>% select(x)))}
+#Table 1: Result by Questions in Tour Evaluation
 
+_Table 1_ shows the percentage of each satisfaction category based on each type of question.The eight questions we are interested in are: Overall Assessment, Tour Itinerary, Tour Director, Lecture/Host, Tour Hotel, Tour Ship, Tour Meal, and Tour Staff. The row Average at the bottom indicates the overall satisfaction through the year. 
+<br/>
 
-eval.sum <-lapply(colnames(datasummary2017[,3:10]),Group.Evaluation)
-eval.sum <-as.data.frame(do.call(rbind, eval.sum ))
-knitr::kable(eval.sum,format = "markdown")
+```{r,echo=FALSE, message=TRUE}
+chart.one <-Group.Evaluation(datasum2017)
+knitr::kable(chart.one)
+```
+<br/>
+
+#Table 2: Result by Individual Tour Operators
+
+_Table 2_ shows the percentage of each satisfaction category based on each tour operators. The six operators are: AHI, GHG, GON, ODY, ORB, and SET. The column Total represents how many feedbacks each tour operators got through the year. Each satisfaction rating is the average rating of all the tips hold by each spercific operator. 
+<br/>
+
+```{r,echo=FALSE, message=TRUE}
+chart.two <-OperatorEval(datasum2017)
+knitr::kable(chart.two)
+```
+<br/>
+
+Here are bar plots helps compare the satisfactions among different operators. 
+<br/>
+
+```{r,echo=FALSE,message=TRUE}
+
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+  geom_bar(stat="identity",position="dodge")+
+  scale_fill_discrete(name="Tour Operators",
+                      breaks=c(1, 2,3,4,5,6),
+                      labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+    labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+plot.chart.two.com 
 
 ```
+<br/>
+
+#Table 3: Result by Individual Trips 
+
+_Table 3_ shows the percentage of each satisfaction category based on each tips. We had 44 trips through
+January to October 2017. Each row indicates each unique trip, and the name is formed by "placename.monthdate" (if the trip took place only once in the year, then it's marked "placename.17"). Same as _Table 2_, the column Total represents the total number of feedbacks we received in each trip. 
+<br/>
+
+```{r,echo=FALSE, message=TRUE}
+chart.three <-NameEval(datasum2017)
+knitr::kable(chart.three)
+```
+<br/>
+
+Here is a bar chart showing the percentage of "Excellent" in each trip. 
+<br/>
+
+```{r, echo=FALSE, message=TRUE}
+plot.three.ex <-ggplot(chart.three)+
+  geom_bar(mapping=aes(x=tour_name,y=Excellent),stat="identity",fill="#56B1F7")+
+  coord_flip(ylim = c(0, 1))+
+  labs(y = "Excellent",x="Trips",title = "The Feedback Excellent on Each Trip")+
+  theme(axis.title.y =element_text(margin = margin(t = 30, r = 18, b = 30, l = 18)))
+plot.three.ex
+```
+<br/>
+
+Here is a bar chart showing the sum of the percenrage of "Fair" and "Poor" in each trip. 
+<br/>
+
+```{r, echo=FALSE, message=TRUE}
+plot.three.fp <-ggplot(chart.three)+
+  geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+  geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+  coord_flip(ylim = c(0, 1))+
+  labs(y = "Sum of Fair and Good",x="Trips",title = "The Feedback Fair and Poor on Each Trip")+
+  theme(axis.title.y =element_text(margin = margin(t = 30, r = 18, b = 30, l = 18)))
+plot.three.fp 
+
+```
+<br/>
+
+#Futher Improvement 
+
+* The satisfactions of lecture and host are combined as lecture_host. The number of result is not accurate enough. 
+* The graph of table three can also be representated by the tour operators. Different tour operators has differernt color. 
+* It will be easier for plot if we flip the row and column of the charts. 
+
+<br/>
+<br/>
