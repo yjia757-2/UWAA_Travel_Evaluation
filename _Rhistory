@@ -1,0 +1,512 @@
+View(fq.sp.fo)
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?" #fq='Sports' 'Foreign'
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="books",
+"facet_field"="day_of_week",
+"begin_date"=20120101,
+"end_date"=20120101)
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.sp.fo <- flatten(results)
+View(fq.sp.fo)
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?" #fq="books"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="books",
+"facet_field"="day_of_week",
+"begin_date"=20120101,
+"end_date"=20120101)
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.books <- flatten(results)
+View(fq.books)
+fq.books$response.docs.headline.content_kicker
+fq.books$response.docs.abstract
+fq.books$response.docs.headline.main
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?" #fq="books"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="books",
+"facet_field"="day_of_week",
+"begin_date"=20120101,
+"end_date"=20120101,
+"facet_field"="source")
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.books <- flatten(results)
+fq.books$response.docs.headline.main
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?" #fq="books"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="books",
+"facet_field"="day_of_week",
+"begin_date"=20120101,
+"end_date"=20120101,
+"facet_field"="source")
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.books <- flatten(results)
+fq.books
+View(fq.books)
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?" #fq="books"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="books",
+"facet_field"="day_of_week",
+"begin_date"=20120101,
+"end_date"=20130101,
+"facet_field"="source")
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.books <- flatten(results)
+View(fq.books)
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?"  #fq="romney"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="romney",
+"begin_date"=20120101,
+"end_date"=20120101)
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.romey <- flatten(results)
+View(fq.romey)
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?"  #fq="romney". facet
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="romney",
+"facet_field"="day_of_week",
+"begin_date"=20120101,
+"end_date"=20120101)
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.romey2 <- flatten(results)
+View(fq.romey2)
+body
+response <-GET("http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=romney&facet_field=day_of_week&begin_date=20120101&end_date=20120101&api-key=cb7ad64f78f24f90a6b29ccb6576821a")
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.romey2 <- flatten(results)
+View(fq.romey2)
+results
+body
+results <-fromJSON(body)
+results
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?"  #fq="romney"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="romney",
+"begin_date"=20120101,
+"end_date"=20120101,
+"page"=1)
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.ronmey <- flatten(results)
+# article search api
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?"  #fq="romney"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="romney",
+"begin_date"=20120101,
+"end_date"=20120101)
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.ronmey <- flatten(results)
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?"  #fq="romney"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="romney",
+"begin_date"=20120101,
+"end_date"=20120101,
+page=3)
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.ronmey <- flatten(results)
+View(fq.romey)
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="news_desk:('Sports' 'Foreign')",
+"facet_field"="day_of_week",
+"begin_date"=20120101,
+"end_date"=20120101,page=1)
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.sp.fo <- flatten(results)
+View(fq.sp.fo)
+base.url <-"http://api.nytimes.com/svc/search/v2/articlesearch.json?"
+query.params <-list("api-key"="cb7ad64f78f24f90a6b29ccb6576821a",
+"fq"="news_desk:('Sports' 'Foreign')",
+"facet_field"="day_of_week",
+"begin_date"=20120101,
+"end_date"=20120101,page=5)
+response <- GET(base.url, query = query.params)
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+fq.sp.fo <- flatten(results)
+View(fq.sp.fo)
+response <-GET("http://api.nytimes.com/svc/semantic/v2/concept/search.json?query=evan&concept_type=nytd_per&api-key=cb7ad64f78f24f90a6b29ccb6576821a")
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+results
+response <-GET("http://api.nytimes.com/svc/semantic/v2/concept/search.json?query=evan&concept_type=nytd_per&api-key=cb7ad64f78f24f90a6b29ccb6576821a")
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+se.per <-flatten(results)
+se.per
+View(se.per)
+response <-GET("http://api.nytimes.com/svc/semantic/v2/concept/name/nytd_geo/Kansas?fields=all&api-key=cb7ad64f78f24f90a6b29ccb6576821a")
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+se.per <-flatten(results)
+response <-GET("http://api.nytimes.com/svc/semantic/v2/concept/search.json?query=evan&concept_type=nytd_per&api-key=cb7ad64f78f24f90a6b29ccb6576821a")
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+se.per1 <-flatten(results)
+response <-GET("http://api.nytimes.com/svc/semantic/v2/concept/name/nytd_geo/Kansas?fields=all&api-key=cb7ad64f78f24f90a6b29ccb6576821a")
+body <-content(response, "text")
+results <-as.data.frame(fromJSON(body))
+se.per2 <-flatten(results)
+View(se.per2)
+se.per2$results.geocodes
+View(se.per2)
+se.per2$results.article_list.results
+as.data.frame(se.per2$results.article_list.results)
+g <-as.data.frame(se.per2$results.article_list.results)
+View(g)
+library(jsonlite)
+library(httr)
+library(knitr)
+library(rmarkdown)
+library(dplyr)
+library(ggplot2)
+library(data.table)
+library(stringr)
+source("analysis.R")
+library(formattble)
+install.packages("formattable")
+library(jsonlite)
+library(httr)
+library(knitr)
+library(rmarkdown)
+library(dplyr)
+library(ggplot2)
+library(data.table)
+library(stringr)
+library(formattble)
+library(jsonlite)
+library(httr)
+library(knitr)
+library(rmarkdown)
+library(dplyr)
+library(ggplot2)
+library(data.table)
+library(stringr)
+library(formattable)
+source("analysis.R")
+datasum2017 <- InputData(params$data_2017)
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aex(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aex(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip()
+chart.one <-Group.Evaluation(datasum2017)
+knitr::kable(chart.one)
+chart.two <-OperatorEval(datasum2017)
+knitr::kable(chart.two)
+chart.three <-NameEval(datasum2017)
+knitr::kable(chart.three)
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aex(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aex(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip()
+```{r, echo=FALSE, message=TRUE}
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip()
+plot.three.f
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(xlim = c(0, 1))
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(x = "Sum of Fair and Good",y="Trips")
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Sum of Fair and Good",x="Trips")
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Sum of Fair and Good",x="Trips",title = "The Feedback Fair and Poor on Each Trip")
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Sum of Fair and Good",x="Trips",title = "The Feedback Fair and Poor on Each Trip")+
+element_text(margin = margin(t = 0, r = 20, b = 0, l = 0))
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Sum of Fair and Good",x="Trips",title = "The Feedback Fair and Poor on Each Trip")+
+theme(axis.title.y =element_text(margin = margin(t = 0, r = 20, b = 0, l = 0)))
+```{r, echo=FALSE, message=TRUE}
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Sum of Fair and Good",x="Trips",title = "The Feedback Fair and Poor on Each Trip")+
+theme(axis.title.y =element_text(margin = margin(t = 10, r = 10, b = 10, l = 10)))
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Sum of Fair and Good",x="Trips",title = "The Feedback Fair and Poor on Each Trip")+
+theme(axis.title.y =element_text(margin = margin(t = 18, r = 18, b = 18, l = 18)))
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Sum of Fair and Good",x="Trips",title = "The Feedback Fair and Poor on Each Trip")+
+theme(axis.title.y =element_text(margin = margin(t = 18, r = 18, b = 18, l = 18)))
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Sum of Fair and Good",x="Trips",title = "The Feedback Fair and Poor on Each Trip")+
+theme(axis.title.y =element_text(margin = margin(t = 30, r = 18, b = 18, l = 18)))
+plot.three.fp
+plot.three.fp <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Fair),stat="identity",fill="#56B1F7")+
+geom_bar(mapping=aes(x=tour_name,y=Poor),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Sum of Fair and Good",x="Trips",title = "The Feedback Fair and Poor on Each Trip")+
+theme(axis.title.y =element_text(margin = margin(t = 30, r = 18, b = 30, l = 18)))
+plot.three.fp
+plot.three.ex <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Excellent),stat="identity",fill="#56B1F7")+coord_flip()
+plot.three.ex
+plot.three.ex <-ggplot(chart.three)+
+geom_bar(mapping=aes(x=tour_name,y=Excellent),stat="identity",fill="#56B1F7")+
+coord_flip(ylim = c(0, 1))+
+labs(y = "Excellent",x="Trips",title = "The Feedback Excellent on Each Trip")+
+theme(axis.title.y =element_text(margin = margin(t = 30, r = 18, b = 30, l = 18)))
+plot.three.ex
+Names=c("Food","Music","People")     # create list of names
+data=data.frame(cbind(freq),Names)   # combine them into a data frame
+data=data[,c(5,3,1,2,4)]
+ggplot(chart.two, aes(eval, value)) +
+geom_bar(aes(fill = tour_operator), position = "dodge", stat="identity")
+dfm <- melt(df[,c("Excellent","VeryGood", "Good"," Fair", "Poor")],id.vars = 1)
+dfm <- melt(df[,c("Excellent","VeryGood", "Good"," Fair", "Poor")],id.vars = 1)
+chart.two <-OperatorEval(datasum2017)
+knitr::kable(chart.two)
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+View(df)
+ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1, 2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+xlab("Satisfaction Category")+ylab("Percentage")
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1, 2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+xlab("Satisfaction Category")+ylab("Percentage")
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1, 2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+xlab("Satisfaction Category")+ylab("Percentage")
+plot.chart.two.com
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1, 2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(axis.title.y =element_text(margin = margin(t = 30, r = 18, b = 30, l = 18)))
+plot.chart.two.com
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1, 2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(axis.title.y =element_text(margin = margin(t =0, r = 0, b = 18, l = 18)))
+plot.chart.two.com
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1, 2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category")+
+ggtitle("Comparison Among Six Tour Operators")
+plot.chart.two.com
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1, 2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category")+
+ggtitle("Comparison Among Six Tour Operators")+
+theme(plot.title = element_text("Comparison Among Six Tour Operators"))
+plot.chart.two.com
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1, 2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+plot.chart.two.com
+library(jsonlite)
+library(httr)
+library(knitr)
+library(rmarkdown)
+library(dplyr)
+library(ggplot2)
+library(data.table)
+library(stringr)
+library(formattable)
+source("analysis.R")
+datasum2017 <- InputData(params$data_2017)
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+chart.two <-OperatorEval(datasum2017)
+knitr::kable(chart.two)
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=6,
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+plot.chart.two.com
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_manual(name="Tour Operators",
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+plot.chart.two.com
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+plot.chart.two.com
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5),legend.position="bottom")
+plot.chart.two.com
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))+
+legend('topright',unique(chart.two$tour_operator),
+col=unique(chart.two$tour_operator), pch=21)
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_fill_discrete(name="Tour Operators",
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+plot.chart.two.com
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_color_discrete(name="Tour Operators",
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+plot.chart.two.com
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_color_discrete(name="Tour Operators",
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+plot.chart.two.com
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_color_discrete(title="Tour Operators",
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+```{r,echo=FALSE,message=TRUE}
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_color_discrete(
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+plot.chart.two.com
+df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "VeryGood","Good","Fair","Poor"))
+plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
+geom_bar(stat="identity",position="dodge")+
+scale_color_discrete(
+breaks=c(1,2,3,4,5,6),
+labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
+scale_fill_discrete(name = "Tour Operators")+
+labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+theme(plot.title = element_text(hjust = 0.5))
+plot.chart.two.com

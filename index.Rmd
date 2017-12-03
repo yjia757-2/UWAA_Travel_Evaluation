@@ -56,10 +56,11 @@ df <-melt(chart.two, id.vars = "tour_operator", measure.vars = c("Excellent", "V
 
 plot.chart.two.com <-ggplot(df,aes(x=variable,y=value,fill=factor(tour_operator)))+
   geom_bar(stat="identity",position="dodge")+
-  scale_fill_discrete(name="Tour Operators",
-                      breaks=c(1, 2,3,4,5,6),
+  scale_color_discrete(
+                      breaks=c(1,2,3,4,5,6),
                       labels=c("AHI", "GHG","GON","ODY","ORB","SET"))+
-    labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
+  scale_fill_discrete(name = "Tour Operators")+
+  labs(y = "Percentage",x="Satisfaction Category",title = "Comparison Among Six Tour Operators")+
   theme(plot.title = element_text(hjust = 0.5))
 
 plot.chart.two.com 
@@ -110,8 +111,6 @@ plot.three.fp
 #Futher Improvement 
 
 * The satisfactions of lecture and host are combined as lecture_host. The number of result is not accurate enough. 
-* The graph of table three can also be representated by the tour operators. Different tour operators has differernt color. 
-* It will be easier for plot if we flip the row and column of the charts. 
 
 <br/>
 <br/>
